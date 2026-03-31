@@ -8,7 +8,9 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.SwellGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Blaze;
 import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -18,7 +20,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 /**
  * Handles all Creeper-related events:
  * <ol>
- *   <li>Replaces every hostile mob spawn with a Creeper.</li>
+ *   <li>Replaces every hostile mob spawn with a Creeper (Endermen and Blazes are exempt).</li>
  *   <li>Charges Creepers that spawn during a thunderstorm.</li>
  *   <li>Injects the smart-targeting AI goal into every Creeper.</li>
  * </ol>
@@ -39,7 +41,10 @@ public class CreeperEventHandler {
         ServerLevelAccessor levelAccessor = event.getLevel();
         ServerLevel serverLevel = levelAccessor.getLevel();
 
-        if (mob instanceof Monster && !(mob instanceof Creeper)) {
+        if (mob instanceof Monster
+                && !(mob instanceof Creeper)
+                && !(mob instanceof EnderMan)
+                && !(mob instanceof Blaze)) {
             // Cancel the original hostile mob spawn
             event.setSpawnCancelled(true);
 
