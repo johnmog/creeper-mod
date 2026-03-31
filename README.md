@@ -61,6 +61,21 @@ On macOS, if you see a "permission denied" error, first run: `chmod +x gradlew`
    - **Windows**: `%APPDATA%\.minecraft\mods\`
 4. Launch Minecraft with the **Forge 1.20.1** profile.
 
+### macOS Firewall (LAN / Open to LAN)
+
+When Minecraft with Forge first binds a local server port (single-player or Open to LAN), macOS will show a dialog:
+
+> **"Do you want the app 'java' to accept incoming network connections?"**
+
+Click **Allow**. If you accidentally clicked Deny, re-enable it manually:
+
+1. **System Settings** → **Network** → **Firewall** → **Options…**
+2. Find `java` (or the Minecraft launcher) in the list.
+3. Set it to **Allow incoming connections**.
+4. Click **OK** and restart Minecraft.
+
+> **Note:** This mod itself makes no network calls — all its logic (mob spawn replacement, Creeper AI, explosions) runs entirely server-side inside the game engine. The firewall prompt comes from Minecraft/Forge's built-in LAN server, not from the mod.
+
 ## CurseForge
 
 This mod is structured to meet all CurseForge submission requirements:
