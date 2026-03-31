@@ -1,15 +1,16 @@
 modLoader="javafml"
 loaderVersion="${loader_version_range}"
 license="${mod_license}"
+issueTrackerURL="https://github.com/johnmog/creeper-mod/issues"
 
 [[mods]]
     modId="${mod_id}"
     version="${mod_version}"
     displayName="${mod_name}"
+    displayURL="https://github.com/johnmog/creeper-mod"
+    logoFile="${mod_id}.png"
+    authors="${mod_authors}"
     description='''${mod_description}'''
-
-[[authors]]
-    name="${mod_authors}"
 
 [[dependencies.${mod_id}]]
     modId="forge"
