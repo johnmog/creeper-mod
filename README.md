@@ -1,5 +1,7 @@
 # Creeper Mod
 
+[![Build](https://github.com/johnmog/creeper-mod/actions/workflows/build.yml/badge.svg)](https://github.com/johnmog/creeper-mod/actions/workflows/build.yml)
+
 A Minecraft Forge mod for **1.20.1** that makes Creepers the dominant hostile mob.
 
 ## Features
@@ -137,6 +139,32 @@ This mod is structured to meet all CurseForge submission requirements:
 ./gradlew genIntellijRuns   # IntelliJ IDEA
 ./gradlew genEclipseRuns    # Eclipse
 ```
+
+## Release Process
+
+Releases are automated via GitHub Actions. When a version tag is pushed, the workflow builds the mod and publishes a GitHub Release with the compiled JAR attached.
+
+### Creating a Release
+
+1. Update `mod_version` in `gradle.properties` to the new version (e.g., `1.1.0`).
+2. Commit the version bump:
+   ```bash
+   git add gradle.properties
+   git commit -m "Bump version to 1.1.0"
+   git push
+   ```
+3. Tag the commit and push the tag:
+   ```bash
+   git tag v1.1.0
+   git push origin v1.1.0
+   ```
+
+The [Release workflow](https://github.com/johnmog/creeper-mod/actions/workflows/release.yml) will automatically:
+- Build the mod JAR
+- Create a GitHub Release named after the tag
+- Attach the compiled JAR to the release
+
+The finished release will appear on the [Releases page](https://github.com/johnmog/creeper-mod/releases).
 
 ## License
 
