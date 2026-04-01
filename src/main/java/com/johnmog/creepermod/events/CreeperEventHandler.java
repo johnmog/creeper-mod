@@ -2,6 +2,7 @@ package com.johnmog.creepermod.events;
 
 import com.johnmog.creepermod.CreeperMod;
 import com.johnmog.creepermod.ai.CreeperSmartTargetGoal;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -98,7 +99,10 @@ public class CreeperEventHandler {
 
     private static void applyThunderstormCharge(Creeper creeper, ServerLevel level) {
         if (level.isThundering()) {
-            creeper.setPowered(true);
+            CompoundTag nbt = new CompoundTag();
+            creeper.addAdditionalSaveData(nbt);
+            nbt.putBoolean("powered", true);
+            creeper.readAdditionalSaveData(nbt);
             CreeperMod.LOGGER.debug("Creeper charged due to thunderstorm at ({})",
                     creeper.blockPosition());
         }
