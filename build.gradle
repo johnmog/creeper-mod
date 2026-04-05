@@ -30,6 +30,10 @@ minecraft {
 
         client {
             property 'forge.enabledGameTestNamespaces', mod_id
+            // macOS requires the OpenGL context on the main thread (LWJGL limitation)
+            if (System.getProperty('os.name').toLowerCase().contains('mac')) {
+                jvmArg '-XstartOnFirstThread'
+            }
         }
 
         server {

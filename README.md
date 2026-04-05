@@ -83,12 +83,34 @@ This mod is structured to meet all CurseForge submission requirements:
 - The mod logo (`creepermod.png`) is bundled inside the JAR.
 - Uses semantic versioning (`1.0.0`).
 
+## Running Locally (Development)
+
+The quickest way to test the mod without installing Forge separately is to launch the embedded development client directly from Gradle:
+
+```bash
+./gradlew runClient
+```
+
+This boots a Minecraft 1.20.1 + Forge 47.2.0 instance with the mod already on the classpath — no JAR copy or separate Forge installer needed.
+
+### macOS requirement — `-XstartOnFirstThread`
+
+On macOS, LWJGL (the OpenGL/audio library Minecraft uses) **requires the JVM to be started on the main thread**. Without this flag the client window never opens. `build.gradle` already passes `-XstartOnFirstThread` automatically when `os.name` contains `mac`, so `./gradlew runClient` works out of the box on both Intel and Apple Silicon Macs.
+
+If you ever launch the client outside of Gradle (e.g. via a custom run configuration in your IDE), make sure to add this JVM argument manually:
+
+```
+-XstartOnFirstThread
+```
+
 ## Development Setup
 
 ```bash
 ./gradlew genIntellijRuns   # IntelliJ IDEA
 ./gradlew genEclipseRuns    # Eclipse
 ```
+
+> **Note for IntelliJ / Eclipse on macOS:** after running `genIntellijRuns` / `genEclipseRuns`, open the generated **Minecraft Client** run configuration and add `-XstartOnFirstThread` to the JVM arguments field before launching.
 
 ## License
 
